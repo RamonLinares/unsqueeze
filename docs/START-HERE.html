@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Start here · Unsqueeze</title>
+  <style>
+    :root { color-scheme: dark; font-family: system-ui, -apple-system, sans-serif; color: #eff2eb; background: #101613; }
+    * { box-sizing: border-box; }
+    body { margin: 0; line-height: 1.65; }
+    main { max-width: 850px; padding: 48px 24px 64px; margin: auto; }
+    .brand { color: #d5ef9f; font-weight: 700; letter-spacing: .16em; font-size: 13px; }
+    h1 { font-size: clamp(32px, 6vw, 48px); line-height: 1.15; letter-spacing: -.04em; margin: 18px 0; }
+    h2 { font-size: 22px; margin: 0 0 8px; line-height: 1.35; }
+    p { margin: 0 0 14px; }
+    .intro { font-size: 19px; color: #bdc6bc; max-width: 650px; }
+    .note { padding: 16px 20px; border-left: 3px solid #d5ef9f; background: #1b241c; margin: 24px 0; }
+    ol { list-style: none; counter-reset: step; padding: 0; }
+    ol > li { counter-increment: step; position: relative; padding: 24px 24px 12px 76px; margin: 14px 0; border: 1px solid #344136; border-radius: 16px; background: #18211b; }
+    ol > li::before { content: counter(step); position: absolute; top: 24px; left: 24px; width: 32px; height: 32px; background: #d5ef9f; color: #101613; border-radius: 50%; text-align: center; font-weight: 750; line-height: 32px; }
+    code { padding: 2px 6px; border-radius: 5px; background: #29352b; color: #d5ef9f; font-size: .95em; overflow-wrap: anywhere; }
+    a { color: #d5ef9f; text-underline-offset: 3px; }
+    section { margin-top: 36px; }
+    footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #344136; color: #bdc6bc; font-size: 14px; }
+    @media (max-width: 520px) { main { padding: 28px 18px; } ol > li { padding: 20px 16px 8px 60px; } ol > li::before { left: 16px; top: 20px; } }
+  </style>
+</head>
+<body>
+<main>
+  <div class="brand">UNSQUEEZE / START HERE</div>
+  <h1>Your lens. Natural proportions.</h1>
+  <p class="intro">Correct anamorphic camera video in Google Meet. Other people in your call receive the corrected image.</p>
+  <p class="note">You need desktop Google Chrome and a camera that already works in Meet. No terminal, account, or build tools are needed.</p>
+  <ol>
+    <li><h2>Keep this folder somewhere permanent</h2><p>Unzip the download first. Move the <strong>Unsqueeze</strong> folder to Documents or another permanent location. It must contain <code>manifest.json</code> and this guide. Keep the folder there while the extension is installed.</p></li>
+    <li><h2>Open Chrome’s extensions page</h2><p>Type <code>chrome://extensions</code> into Chrome’s address bar and press Enter. Turn on <strong>Developer mode</strong> at the top right.</p></li>
+    <li><h2>Load the Unsqueeze folder</h2><p>Click <strong>Load unpacked</strong> and select the folder containing <code>manifest.json</code>. Select the whole folder, not the ZIP or an individual file. An <strong>Unsqueeze — Anamorphic Webcam</strong> card should appear.</p></li>
+    <li><h2>Pin it and choose your lens factor</h2><p>Click Chrome’s puzzle-piece Extensions icon, then the pin beside Unsqueeze. Open Unsqueeze, leave <strong>Desqueeze video</strong> on, and select your lens’s squeeze factor. Use a preset or type a custom value from 1× to 3×.</p><p>Use the lens’s squeeze ratio, not its focal length. A 1.5× lens needs 1.5×. A regular lens needs 1× or correction off. Start with <strong>Efficient</strong> quality; use <strong>Low power</strong> to reduce processing load.</p></li>
+    <li><h2>Reload Meet and use your normal camera</h2><p>Reload any open Google Meet tabs. In <strong>Meet → Settings → Video</strong>, select your normal camera. Unsqueeze corrects that feed; there is no additional virtual camera to select.</p><p>After enabling correction, changing the camera filter, or changing capture quality, turn Meet’s camera off and back on.</p></li>
+  </ol>
+  <section><h2>Check the result before a call</h2><p>Open <strong>Unsqueeze → Open camera preview → Test pattern</strong>. Set the factor to <strong>1.5×</strong>: the circle should be round. This test uses no camera. You can also choose <strong>Start camera</strong> to check your real image. Click <strong>Stop</strong> before using your camera in Meet.</p></section>
+  <section><h2>Update later</h2><p>Download the latest release and replace the files inside this same folder, keeping its location. Open <code>chrome://extensions</code>, click <strong>Reload</strong> on Unsqueeze, then reload Meet. Updates are manual. Avoid installing a second copy.</p></section>
+  <section><h2>Need a hand?</h2><p>If Chrome reports a missing manifest, select the folder directly containing <code>manifest.json</code>. If the picture is still squeezed, reload Meet and check the factor and camera filter. Work or school browsers may restrict manual installation.</p><p><a href="https://github.com/RamonLinares/unsqueeze/blob/main/docs/INSTALL.md">Full installation guide</a> · <a href="https://github.com/RamonLinares/unsqueeze/issues">Get help on GitHub</a></p></section>
+  <footer>Video is processed on your device. Unsqueeze has no recording, analytics, or upload service; Meet transmits your call normally. MIT licensed. <a href="https://github.com/RamonLinares/unsqueeze">Source and latest release</a>.</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,8 @@
+output/
+.playwright/
+.playwright-cli/
+.DS_Store
+*.zip
+__pycache__/
+*.pyc
+SHA256SUMS.txt
