@@ -46,8 +46,14 @@ with ZipFile(archive_path,'w',ZIP_DEFLATED) as archive:
         ('LICENSE', 'LICENSE'),
     ):
         archive.write(ROOT/source, f'Unsqueeze/{target}')
+# Chrome Web Store uploads need manifest.json at the ZIP root and only the runtime files.
+store_path=ROOT/f'Unsqueeze-{manifest["version"]}-chrome-web-store.zip'
+with ZipFile(store_path,'w',ZIP_DEFLATED) as archive:
+    for path in sorted((ROOT/'extension').rglob('*')):
+        if path.is_file() and not path.name.startswith('.'):
+            archive.write(path,path.relative_to(ROOT/'extension'))
 stable_path = ROOT/'Unsqueeze.zip'
 shutil.copyfile(archive_path, stable_path)
 digest = hashlib.sha256(stable_path.read_bytes()).hexdigest()
 (ROOT/'SHA256SUMS.txt').write_text(f'{digest}  Unsqueeze.zip\n')
-print(f'Built {archive_path.name} and Unsqueeze.zip. Load the extracted Unsqueeze folder in Chrome.')
+print(f'Built {archive_path.name}, Unsqueeze.zip, and {store_path.name}. Load the extracted Unsqueeze folder in Chrome; upload the store ZIP to the Chrome Web Store.')

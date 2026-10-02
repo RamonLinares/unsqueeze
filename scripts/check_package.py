@@ -48,4 +48,12 @@ with ZipFile(ROOT / 'Unsqueeze.zip') as archive:
             for path in parser.paths:
                 target = str(PurePosixPath(name).parent / path)
                 assert target in names, f'Missing HTML reference: {target}'
-print(f'Package verified: v{manifest["version"]}, {len(names)} files, all runtime files and local links intact.')
+with ZipFile(ROOT / f'Unsqueeze-{manifest["version"]}-chrome-web-store.zip') as store:
+    assert store.testzip() is None, 'Corrupt store ZIP'
+    store_names = store.namelist()
+    assert set(store_names) == {n.removeprefix('Unsqueeze/') for n in expected if n.removeprefix('Unsqueeze/') not in ('README.md', 'START-HERE.html', 'PRIVACY.md', 'LICENSE')}, 'Unexpected or missing store files'
+    assert all('..' not in PurePosixPath(n).parts for n in store_names)
+    assert json.loads(store.read('manifest.json')) == manifest, 'Store ZIP needs manifest.json at its root'
+    for name in store_names:
+        assert store.read(name) == (source / name).read_bytes()
+print(f'Package verified: v{manifest["version"]}, {len(names)} files, all runtime files and local links intact; store ZIP has {len(store_names)} runtime files at its root.')

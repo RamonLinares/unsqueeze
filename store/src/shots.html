@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Unsqueeze store images</title>
+<link rel="stylesheet" href="../../extension/style.css">
+<style>
+  /* Store image compositions. Rendered by scripts/store_assets.mjs at exact store sizes. */
+  html, body { margin: 0; overflow: hidden; background: #111715; }
+  .shot { width: 1280px; height: 800px; padding: 64px 72px; display: none; flex-direction: column; justify-content: center; }
+  body[data-shot="compare"] #compare, body[data-shot="framing"] #framing, body[data-shot="popup"] #popup { display: flex; }
+  .brand { margin-bottom: 18px; }
+  h1 { font-size: 46px; letter-spacing: -1.4px; margin: 0 0 12px; font-weight: 500; }
+  .lede { font-size: 18px; color: #a7b3aa; max-width: 780px; }
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; margin-top: 56px; }
+  .panel canvas { width: 100%; aspect-ratio: 16/9; display: block; border: 1px solid #303b34; border-radius: 14px; background: #080c09; }
+  .caption { display: flex; justify-content: space-between; align-items: baseline; margin-top: 16px; font-size: 16px; color: #c5cfc7; }
+  .caption b { font-weight: 600; color: #f0f3ec; }
+  .caption .tag { font-size: 12px; letter-spacing: .14em; color: #89968c; }
+  .caption .tag.on { color: #d5ef9f; }
+  #popup { flex-direction: row; gap: 72px; align-items: center; }
+  #popup .copy { flex: 1; }
+  #popup ul { list-style: none; padding: 0; margin: 36px 0 0; }
+  #popup li { font-size: 18px; color: #c5cfc7; padding: 14px 0; border-top: 1px solid #303b34; }
+  #popup li:last-child { border-bottom: 1px solid #303b34; }
+  #popup li b { color: #d5ef9f; font-weight: 600; }
+  .window { position: relative; width: 372px; height: 672px; border: 1px solid #3b493f; border-radius: 12px; overflow: hidden; box-shadow: 0 30px 80px #000a; flex: none; }
+  .window::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 120px; background: linear-gradient(#11171500, #111715 85%); }
+  .window iframe { width: 370px; height: 1000px; border: 0; display: block; }
+  /* Promo tiles */
+  .tile { display: none; position: relative; overflow: hidden; background: #111715; }
+  body[data-shot="promo"] #promo, body[data-shot="marquee"] #marquee { display: block; }
+  #promo { width: 440px; height: 280px; }
+  #marquee { width: 1400px; height: 560px; }
+  .tile .text { position: absolute; }
+  #promo .text { left: 32px; top: 34px; width: 230px; }
+  #promo .name { font-size: 34px; letter-spacing: .14em; font-weight: 800; color: #d5ef9f; }
+  #promo .line { font-size: 17px; line-height: 1.35; color: #f0f3ec; margin-top: 16px; }
+  #promo .meta { font-size: 11px; letter-spacing: .14em; color: #89968c; position: absolute; left: 32px; bottom: 30px; }
+  #marquee .text { left: 88px; top: 132px; width: 540px; }
+  #marquee .name { font-size: 64px; letter-spacing: .14em; font-weight: 800; color: #d5ef9f; }
+  #marquee .line { font-size: 32px; line-height: 1.25; letter-spacing: -.6px; color: #f0f3ec; margin-top: 28px; }
+  #marquee .meta { font-size: 15px; letter-spacing: .14em; color: #89968c; margin-top: 40px; }
+  .tile svg { position: absolute; }
+</style></head>
+<body>
+<section class="shot" id="compare">
+  <div class="brand">UNSQUEEZE <span>ANAMORPHIC WEBCAM</span></div>
+  <h1>Squeezed in. Natural proportions out.</h1>
+  <p class="lede">Anamorphic lenses compress the image sideways. Unsqueeze restores the proportions before Google Meet sends your video, so everyone in the call sees you correctly.</p>
+  <div class="pair">
+    <div class="panel"><canvas id="before" width="1280" height="720"></canvas><div class="caption"><b>Camera as Chrome receives it</b><span class="tag">1× · SQUEEZED</span></div></div>
+    <div class="panel"><canvas id="after" width="1280" height="720"></canvas><div class="caption"><b>What other participants see</b><span class="tag on">1.5× · CORRECTED</span></div></div>
+  </div>
+</section>
+<section class="shot" id="framing">
+  <div class="brand">UNSQUEEZE <span>ANAMORPHIC WEBCAM</span></div>
+  <h1>Fill the call, or keep the whole image.</h1>
+  <p class="lede">Crop equal amounts from the sides to fill Meet’s frame, or keep the full wide shot with black bars above and below. Both restore the same proportions.</p>
+  <div class="pair">
+    <div class="panel"><canvas id="crop" width="1280" height="720"></canvas><div class="caption"><b>Fill the call</b><span class="tag on">CROPS THE SIDES</span></div></div>
+    <div class="panel"><canvas id="fit" width="1280" height="720"></canvas><div class="caption"><b>Keep the whole image</b><span class="tag on">LETTERBOX</span></div></div>
+  </div>
+</section>
+<section class="shot" id="popup">
+  <div class="copy">
+    <div class="brand">UNSQUEEZE <span>ANAMORPHIC WEBCAM</span></div>
+    <h1>Set your lens once.</h1>
+    <p class="lede">Pick a squeeze factor from the toolbar. Select your normal camera in Google Meet. No virtual camera to install.</p>
+    <ul>
+      <li><b>1× to 2× presets</b> or any custom factor up to 3×</li>
+      <li><b>Efficient and Low power</b> modes to limit processing</li>
+      <li><b>Camera-name filter</b> for switching to a laptop webcam</li>
+      <li><b>Local processing</b>: no account, analytics, or uploads</li>
+    </ul>
+  </div>
+  <div class="window"><iframe src="../../extension/popup.html" title="Unsqueeze popup"></iframe></div>
+</section>
+<div class="tile" id="promo">
+  <div class="text"><div class="name">UNSQUEEZE</div><div class="line">Natural proportions for anamorphic webcams in Google Meet.</div></div>
+  <div class="meta">LOCAL VIDEO PROCESSING</div>
+  <svg width="440" height="280" viewBox="0 0 440 280" aria-hidden="true">
+    <ellipse cx="330" cy="104" rx="30" ry="45" fill="none" stroke="#5c7362" stroke-width="3" stroke-dasharray="6 6"/>
+    <path d="M330 162v22m-8-8 8 8 8-8" stroke="#d5ef9f" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="330" cy="232" r="0" fill="#d5ef9f"/>
+  </svg>
+</div>
+<div class="tile" id="marquee">
+  <div class="text"><div class="name">UNSQUEEZE</div><div class="line">Natural proportions for anamorphic webcams in Google Meet.</div><div class="meta">FREE · OPEN SOURCE · LOCAL VIDEO PROCESSING</div></div>
+  <canvas id="marquee-after" width="1280" height="720" style="position:absolute;right:80px;top:100px;width:640px;height:360px;border:1px solid #303b34;border-radius:16px"></canvas>
+</div>
+<script src="../../extension/core.js"></script>
+<script>
+  const shot = new URLSearchParams(location.search).get('shot') || 'compare';
+  document.body.dataset.shot = shot;
+  // Same synthetic 1.5×-squeezed source as the extension's preview test pattern (extension/preview.js).
+  const source = document.createElement('canvas'); source.width = 1280; source.height = 720;
+  const s = source.getContext('2d');
+  s.fillStyle = '#21332b'; s.fillRect(0, 0, 1280, 720);
+  s.save(); s.translate(640, 360); s.scale(1 / 1.5, 1);
+  s.strokeStyle = '#435c4a'; s.lineWidth = 2;
+  for (let x = -960; x <= 960; x += 90) { s.beginPath(); s.moveTo(x, -360); s.lineTo(x, 360); s.stroke(); }
+  for (let y = -360; y <= 360; y += 90) { s.beginPath(); s.moveTo(-960, y); s.lineTo(960, y); s.stroke(); }
+  s.fillStyle = '#d5ef9f'; s.beginPath(); s.arc(0, 0, 155, 0, 2 * Math.PI); s.fill();
+  s.fillStyle = '#17281d'; s.textAlign = 'center'; s.font = '24px sans-serif'; s.fillText('A circle, again.', 0, 8);
+  s.fillStyle = '#d5ef9f'; s.font = '18px sans-serif'; s.fillText('UNSQUEEZE  ·  1.5× TEST INPUT', 0, 265);
+  s.beginPath(); s.arc(-180, -260, 9, 0, Math.PI * 2); s.fill();
+  s.restore();
+  function draw(id, overrides) {
+    const canvas = document.getElementById(id), ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#000'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    Unsqueeze.render(ctx, source, 1280, 720, canvas.width, canvas.height, Unsqueeze.normalize({ factor: 1.5, ...overrides }));
+  }
+  document.getElementById('before').getContext('2d').drawImage(source, 0, 0);
+  draw('after', { framing: 'crop' });
+  draw('crop', { framing: 'crop' });
+  draw('fit', { framing: 'fit' });
+  draw('marquee-after', { framing: 'crop' });
+  // Promo tile: the squeezed ellipse becomes a round circle.
+  document.querySelector('#promo circle').setAttribute('r', 45 * 0.82);
+  document.querySelector('#promo ellipse').setAttribute('rx', 45 * 0.82 / 1.5);
+  document.querySelector('#promo ellipse').setAttribute('ry', 45 * 0.82);
+  document.querySelector('#promo ellipse').setAttribute('cy', 70);
+  document.querySelector('#promo path').setAttribute('d', 'M330 128v24m-8-8 8 8 8-8');
+  document.querySelector('#promo circle').setAttribute('cy', 206);
+</script>
+</body></html>

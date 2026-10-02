@@ -14,7 +14,7 @@ Chrome’s local extension storage holds your correction setting, squeeze factor
 
 ## Services and permissions
 
-Unsqueeze has no account system, analytics, telemetry, recording, advertising, payment service, remote code, or upload backend. Its content scripts run only on `meet.google.com` and the legacy `hangouts.google.com` hostname. Its `storage` permission is used for the local preferences and status above.
+Unsqueeze has no account system, analytics, telemetry, recording, advertising, payment service, remote code, or upload backend. Its content scripts run only on `meet.google.com`. Its `storage` permission is used for the local preferences and status above.
 
 ## Removing data
 

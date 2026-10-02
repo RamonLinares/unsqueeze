@@ -4,7 +4,7 @@ For installation and everyday use, start with the [installation guide](INSTALL.m
 
 ## Runtime
 
-The `extension/` directory is the complete Manifest V3 extension. It has no npm dependencies, remote code, server, or build requirement. Load that directory directly in desktop Chrome for development. The manifest restricts injection to Google Meet and the legacy Hangouts hostname.
+The `extension/` directory is the complete Manifest V3 extension. It has no npm dependencies, remote code, server, or build requirement. Load that directory directly in desktop Chrome for development. The manifest restricts injection to Google Meet.
 
 - `core.js`: settings normalization, correction geometry, capture constraints, frame processing, and track ownership.
 - `intercept.js`: wraps page-world `getUserMedia` so the call receives processed video. Microphone tracks pass through unchanged.
@@ -38,6 +38,8 @@ python3 scripts/check_package.py
 Node.js 18+ runs the dependency-free tests. Python 3.9+ generates the icons and packages the release without third-party modules. The two generated archives, `Unsqueeze.zip` and `Unsqueeze-<version>.zip`, are identical and contain a single `Unsqueeze/` folder. The stable filename makes the latest-release download link work across versions. `SHA256SUMS.txt` records its SHA-256 checksum.
 
 The archive contains the runtime, offline installation guide, privacy information, and MIT license. It excludes tests, browser profiles, logs, and developer tooling. `check_package.py` verifies archive integrity, source parity, required files, manifest references, and local HTML references. Generated files are ignored by Git.
+
+The build also writes `Unsqueeze-<version>-chrome-web-store.zip`: the runtime files only, with `manifest.json` at the ZIP root, as the Chrome Web Store requires. `check_package.py` verifies that it matches the source. Store listing text, privacy answers, and reviewer instructions are in [`store/LISTING.md`](../store/LISTING.md). `node scripts/store_assets.mjs` renders the screenshots and promo tiles into `store/images/` with desktop Chrome.
 
 ## Browser and video checks
 
